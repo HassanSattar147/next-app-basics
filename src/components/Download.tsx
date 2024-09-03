@@ -11,19 +11,16 @@ const Download = () => {
       const res = await getVideo(url);
       const videoUrl = res.data.play;
 
-      // Fetch the video as a blob
       const response = await fetch(videoUrl);
       const blob = await response.blob();
 
-      // Create a temporary link element and trigger the download
       const link = document.createElement("a");
       const blobUrl = URL.createObjectURL(blob);
       link.href = blobUrl;
-      link.setAttribute("download", "video.mp4"); // You can customize the file name
+      link.setAttribute("download", "video.mp4");
       document.body.appendChild(link);
       link.click();
 
-      // Clean up
       document.body.removeChild(link);
       URL.revokeObjectURL(blobUrl);
     } catch (error) {
